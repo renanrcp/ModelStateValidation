@@ -15,7 +15,7 @@ namespace ModelStateValidation
 
         internal static IServiceProvider GetDefaultServiceProvider()
         {
-            if (Instance.HasNoContent())
+            if (Instance == null)
                 Instance = CreateDefaultServiceProvider();
 
             return Instance;
