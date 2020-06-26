@@ -11,25 +11,25 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 
-namespace ModelStateValidation
+namespace ModelStateValidation.MetadataProviders
 {
-    internal class DefaultMetadataProvider :
-        IBindingMetadataProvider,
-        IDisplayMetadataProvider,
-        IValidationMetadataProvider
+    internal class DefaultMetadataProvider
     {
+        // The [Nullable] attribute is synthesized by the compiler. It's best to just compare the type name.
         private const string NullableAttributeFullTypeName = "System.Runtime.CompilerServices.NullableAttribute";
         private const string NullableFlagsFieldName = "NullableFlags";
 
         private const string NullableContextAttributeFullName = "System.Runtime.CompilerServices.NullableContextAttribute";
         private const string NullableContextFlagsFieldName = "Flag";
 
+        private readonly IStringLocalizerFactory _stringLocalizerFactory;
         private readonly MvcOptions _options;
         private readonly MvcDataAnnotationsLocalizationOptions _localizationOptions;
 
         public DefaultMetadataProvider(
             MvcOptions options,
-            IOptions<MvcDataAnnotationsLocalizationOptions> localizationOptions)
+            IOptions<MvcDataAnnotationsLocalizationOptions> localizationOptions,
+            IStringLocalizerFactory stringLocalizerFactory)
         {
             if (options == null)
             {
@@ -43,6 +43,7 @@ namespace ModelStateValidation
 
             _options = options;
             _localizationOptions = localizationOptions.Value;
+            _stringLocalizerFactory = stringLocalizerFactory;
         }
 
         /// <inheritdoc />
@@ -60,6 +61,7 @@ namespace ModelStateValidation
             }
         }
 
+        /// <inheritdoc />
         public void CreateDisplayMetadata(DisplayMetadataProviderContext context)
         {
             if (context == null)
@@ -106,11 +108,25 @@ namespace ModelStateValidation
             }
 
             var containerType = context.Key.ContainerType ?? context.Key.ModelType;
+            IStringLocalizer localizer = null;
+            if (_stringLocalizerFactory != null && _localizationOptions.DataAnnotationLocalizerProvider != null)
+            {
+                localizer = _localizationOptions.DataAnnotationLocalizerProvider(containerType, _stringLocalizerFactory);
+            }
 
             // Description
             if (displayAttribute != null)
             {
-                displayMetadata.Description = () => displayAttribute.GetDescription();
+                if (localizer != null &&
+                    !string.IsNullOrEmpty(displayAttribute.Description) &&
+                    displayAttribute.ResourceType == null)
+                {
+                    displayMetadata.Description = () => localizer[displayAttribute.Description];
+                }
+                else
+                {
+                    displayMetadata.Description = () => displayAttribute.GetDescription();
+                }
             }
 
             // DisplayFormatString
@@ -123,13 +139,28 @@ namespace ModelStateValidation
             // DisplayAttribute has precedence over DisplayNameAttribute.
             if (displayAttribute?.GetName() != null)
             {
-
-                displayMetadata.DisplayName = () => displayAttribute.GetName();
+                if (localizer != null &&
+                    !string.IsNullOrEmpty(displayAttribute.Name) &&
+                    displayAttribute.ResourceType == null)
+                {
+                    displayMetadata.DisplayName = () => localizer[displayAttribute.Name];
+                }
+                else
+                {
+                    displayMetadata.DisplayName = () => displayAttribute.GetName();
+                }
             }
             else if (displayNameAttribute != null)
             {
-
-                displayMetadata.DisplayName = () => displayNameAttribute.DisplayName;
+                if (localizer != null &&
+                    !string.IsNullOrEmpty(displayNameAttribute.DisplayName))
+                {
+                    displayMetadata.DisplayName = () => localizer[displayNameAttribute.DisplayName];
+                }
+                else
+                {
+                    displayMetadata.DisplayName = () => displayNameAttribute.DisplayName;
+                }
             }
 
             // EditFormatString
@@ -159,6 +190,12 @@ namespace ModelStateValidation
                 var groupedDisplayNamesAndValues = new List<KeyValuePair<EnumGroupAndName, string>>();
                 var namesAndValues = new Dictionary<string, string>();
 
+                IStringLocalizer enumLocalizer = null;
+                if (_stringLocalizerFactory != null && _localizationOptions.DataAnnotationLocalizerProvider != null)
+                {
+                    enumLocalizer = _localizationOptions.DataAnnotationLocalizerProvider(underlyingType, _stringLocalizerFactory);
+                }
+
                 var enumFields = Enum.GetNames(underlyingType)
                     .Select(name => underlyingType.GetField(name))
                     .OrderBy(field => field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder() ?? 1000);
@@ -171,7 +208,7 @@ namespace ModelStateValidation
                     groupedDisplayNamesAndValues.Add(new KeyValuePair<EnumGroupAndName, string>(
                         new EnumGroupAndName(
                             groupName,
-                            () => GetDisplayName(field)),
+                            () => GetDisplayName(field, enumLocalizer)),
                         value));
                     namesAndValues.Add(field.Name, value);
                 }
@@ -231,7 +268,16 @@ namespace ModelStateValidation
             // Placeholder
             if (displayAttribute != null)
             {
-                displayMetadata.Placeholder = () => displayAttribute.GetPrompt();
+                if (localizer != null &&
+                    !string.IsNullOrEmpty(displayAttribute.Prompt) &&
+                    displayAttribute.ResourceType == null)
+                {
+                    displayMetadata.Placeholder = () => localizer[displayAttribute.Prompt];
+                }
+                else
+                {
+                    displayMetadata.Placeholder = () => displayAttribute.GetPrompt();
+                }
             }
 
             // ShowForDisplay
@@ -263,6 +309,7 @@ namespace ModelStateValidation
             }
         }
 
+        /// <inheritdoc />
         public void CreateValidationMetadata(ValidationMetadataProviderContext context)
         {
             if (context == null)
@@ -373,13 +420,17 @@ namespace ModelStateValidation
             }
         }
 
-        private static string GetDisplayName(FieldInfo field)
+        private static string GetDisplayName(FieldInfo field, IStringLocalizer stringLocalizer)
         {
             var display = field.GetCustomAttribute<DisplayAttribute>(inherit: false);
             if (display != null)
             {
                 // Note [Display(Name = "")] is allowed but we will not attempt to localize the empty name.
                 var name = display.GetName();
+                if (stringLocalizer != null && !string.IsNullOrEmpty(name) && display.ResourceType == null)
+                {
+                    name = stringLocalizer[name];
+                }
 
                 return name ?? field.Name;
             }
