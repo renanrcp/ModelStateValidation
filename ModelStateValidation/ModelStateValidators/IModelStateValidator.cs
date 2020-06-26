@@ -26,6 +26,15 @@ namespace ModelStateValidation
             => TryValidateModel(model, modelState, string.Empty);
 
         /// <summary>
+        /// Try validate a model with the specified model prefix.
+        /// </summary>
+        /// <param name="model">The model to be validated.</param>
+        /// <param name="prefix">The model prefix.</param>
+        /// <returns><see langword="true" /> if the model is valid.</returns>
+        bool TryValidateModel(object model, string prefix)
+            => TryValidateModel(model, new ModelStateDictionary(), prefix);
+
+        /// <summary>
         /// Try validate a model.
         /// </summary>
         /// <param name="model">The model to be validated.</param>
