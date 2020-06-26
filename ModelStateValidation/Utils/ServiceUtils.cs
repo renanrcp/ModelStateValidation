@@ -1,7 +1,13 @@
 using System;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace ModelStateValidation
 {
@@ -28,11 +34,27 @@ namespace ModelStateValidation
                                     .BuildServiceProvider();
         }
 
-        internal static IServiceCollection TryAddDefaultServices(this IServiceCollection collection)
+        internal static IServiceCollection TryAddDefaultServices(this IServiceCollection services)
         {
-            collection.TryAddSingleton<ILoggerFactory, LoggerFactory>();
+            services.AddOptions();
 
-            return collection;
+            services.TryAddTransient<IConfigureOptions<MvcOptions>, ModelStateValidationPostConfigurer>();
+            services.TryAddSingleton<ILoggerFactory, LoggerFactory>();
+            services.TryAddSingleton<IValidationAttributeAdapterProvider, ValidationAttributeAdapterProvider>();
+            services.TryAddSingleton<IModelMetadataProvider, DefaultModelMetadataProvider>();
+            services.TryAddSingleton<IObjectModelValidator>(s =>
+            {
+                var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
+                var metadataProvider = s.GetRequiredService<IModelMetadataProvider>();
+                return new DefaultObjectValidator(metadataProvider, options.ModelValidatorProviders, options);
+            });
+            services.TryAddSingleton<ICompositeMetadataDetailsProvider>(s =>
+            {
+                var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
+                return new DefaultMetadataDetailsProvider(options.ModelMetadataDetailsProviders);
+            });
+
+            return services;
         }
     }
 }
