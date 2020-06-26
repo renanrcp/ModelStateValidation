@@ -13,7 +13,10 @@ using Microsoft.Extensions.Options;
 
 namespace ModelStateValidation.MetadataProviders
 {
-    internal class DefaultMetadataProvider
+    internal class DefaultMetadataProvider :
+        IBindingMetadataProvider,
+        IDisplayMetadataProvider,
+        IValidationMetadataProvider
     {
         // The [Nullable] attribute is synthesized by the compiler. It's best to just compare the type name.
         private const string NullableAttributeFullTypeName = "System.Runtime.CompilerServices.NullableAttribute";
