@@ -42,15 +42,15 @@ namespace ModelStateValidation
             services.TryAddSingleton<ILoggerFactory, LoggerFactory>();
             services.TryAddSingleton<IValidationAttributeAdapterProvider, ValidationAttributeAdapterProvider>();
             services.TryAddSingleton<IModelMetadataProvider, DefaultModelMetadataProvider>();
-            services.TryAddSingleton<IObjectModelValidator>(s =>
+            services.TryAddSingleton<IObjectModelValidator>(a =>
             {
-                var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
-                var metadataProvider = s.GetRequiredService<IModelMetadataProvider>();
+                var options = a.GetRequiredService<IOptions<MvcOptions>>().Value;
+                var metadataProvider = a.GetRequiredService<IModelMetadataProvider>();
                 return new DefaultObjectValidator(metadataProvider, options.ModelValidatorProviders, options);
             });
-            services.TryAddSingleton<ICompositeMetadataDetailsProvider>(s =>
+            services.TryAddSingleton<ICompositeMetadataDetailsProvider>(a =>
             {
-                var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
+                var options = a.GetRequiredService<IOptions<MvcOptions>>().Value;
                 return new DefaultMetadataDetailsProvider(options.ModelMetadataDetailsProviders);
             });
 
