@@ -38,20 +38,21 @@ namespace ModelStateValidation
         {
             services.AddOptions();
 
-            services.TryAddTransient<IConfigureOptions<MvcOptions>, ModelStateValidationPostConfigurer>();
-            services.TryAddSingleton<ILoggerFactory, LoggerFactory>();
             services.TryAddSingleton<IValidationAttributeAdapterProvider, ValidationAttributeAdapterProvider>();
+            services.TryAddTransient<IConfigureOptions<MvcOptions>, ModelStateValidationPostConfigurer>();
             services.TryAddSingleton<IModelMetadataProvider, DefaultModelMetadataProvider>();
+            services.TryAddSingleton<IModelStateValidator, DefaultModelStateValidator>();
+            services.TryAddSingleton<ILoggerFactory, LoggerFactory>();
+            services.TryAddSingleton<ICompositeMetadataDetailsProvider>(a =>
+            {
+                var options = a.GetRequiredService<IOptions<MvcOptions>>().Value;
+                return new DefaultMetadataDetailsProvider(options.ModelMetadataDetailsProviders);
+            });
             services.TryAddSingleton<IObjectModelValidator>(a =>
             {
                 var options = a.GetRequiredService<IOptions<MvcOptions>>().Value;
                 var metadataProvider = a.GetRequiredService<IModelMetadataProvider>();
                 return new DefaultObjectValidator(metadataProvider, options.ModelValidatorProviders, options);
-            });
-            services.TryAddSingleton<ICompositeMetadataDetailsProvider>(a =>
-            {
-                var options = a.GetRequiredService<IOptions<MvcOptions>>().Value;
-                return new DefaultMetadataDetailsProvider(options.ModelMetadataDetailsProviders);
             });
 
             return services;
