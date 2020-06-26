@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace ModelStateValidation
 {
-    internal class DefaultMetadataDetailsProvider : ICompositeMetadataDetailsProvider
+    internal sealed class DefaultMetadataDetailsProvider : ICompositeMetadataDetailsProvider
     {
         private readonly IEnumerable<IMetadataDetailsProvider> _providers;
 

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace ModelStateValidation
 {
-    internal class DefaultObjectValidator : ObjectModelValidator
+    internal sealed class DefaultObjectValidator : ObjectModelValidator
     {
         private readonly MvcOptions _mvcOptions;
 

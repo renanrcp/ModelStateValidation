@@ -13,7 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace ModelStateValidation
 {
-    internal class DefaultMetadataProvider :
+    internal sealed class DefaultMetadataProvider :
         IBindingMetadataProvider,
         IDisplayMetadataProvider,
         IValidationMetadataProvider

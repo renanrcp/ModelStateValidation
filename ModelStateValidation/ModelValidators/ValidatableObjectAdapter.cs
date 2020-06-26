@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace ModelStateValidation
 {
-    internal class ValidatableObjectAdapter : IModelValidator
+    internal sealed class ValidatableObjectAdapter : IModelValidator
     {
         public IEnumerable<ModelValidationResult> Validate(ModelValidationContext context)
         {

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace ModelStateValidation
 {
-    internal class DefaultModelValidatorProvider : IMetadataBasedModelValidatorProvider
+    internal sealed class DefaultModelValidatorProvider : IMetadataBasedModelValidatorProvider
     {
         private readonly IOptions<MvcDataAnnotationsLocalizationOptions> _options;
         private readonly IStringLocalizerFactory _stringLocalizerFactory;

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace ModelStateValidation
 {
-    internal class ModelStateValidationPostConfigurer : IConfigureOptions<MvcOptions>
+    internal sealed class ModelStateValidationPostConfigurer : IConfigureOptions<MvcOptions>
     {
         private readonly IStringLocalizerFactory _stringLocalizerFactory;
         private readonly IValidationAttributeAdapterProvider _validationAttributeAdapterProvider;

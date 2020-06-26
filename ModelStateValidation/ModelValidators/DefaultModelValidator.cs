@@ -8,7 +8,7 @@ using Microsoft.Extensions.Localization;
 
 namespace ModelStateValidation
 {
-    internal class DefaultModelValidator : IModelValidator
+    internal sealed class DefaultModelValidator : IModelValidator
     {
         private static readonly object _emptyValidationContextInstance = new object();
         private readonly IStringLocalizer _stringLocalizer;

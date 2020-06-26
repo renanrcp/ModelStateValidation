@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace ModelStateValidation
 {
-    internal class DefaultModelStateValidator : IModelStateValidator
+    internal sealed class DefaultModelStateValidator : IModelStateValidator
     {
         private readonly IObjectModelValidator _validator;
         private readonly IServiceProvider _provider;
