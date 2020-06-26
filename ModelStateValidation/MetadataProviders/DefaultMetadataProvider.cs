@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 
-namespace ModelStateValidation.MetadataProviders
+namespace ModelStateValidation
 {
     internal class DefaultMetadataProvider :
         IBindingMetadataProvider,
