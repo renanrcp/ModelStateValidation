@@ -3,11 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageId>ModelStateValidation</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>renanrcp</Authors>
     <Description>The ASP.NET Core Model State Validator fully abstracted to use in any .NET Core application.</Description>
     <Copyright>2019 - 2020 renanrcp. All rights reserved.</Copyright>
+    <PackageTags>validation model modelstate modelstatedictionary validator modelvalidation modelstatevalidation csharp dotnet modelvalidator modelstatevalidator</PackageTags>
     <PackageProjectUrl>https://github.com/renanrcp/ModelStateValidation</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/renanrcp/ModelStateValidation</RepositoryUrl>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryType>Git</RepositoryType>
