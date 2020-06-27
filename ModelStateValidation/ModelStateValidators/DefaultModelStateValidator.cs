@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.Extensions.Options;
 
 namespace ModelStateValidation
 {
@@ -11,13 +12,13 @@ namespace ModelStateValidation
         private readonly MvcOptions _options;
         private readonly IServiceProvider _provider;
 
-        public DefaultModelStateValidator(IObjectModelValidator validator, ModelStateValidateOptions options)
-            : this(validator, ApplyOptions(options))
+        public DefaultModelStateValidator(IObjectModelValidator validator, IOptions<MvcOptions> options)
+            : this(validator, options.Value, null)
         {
         }
 
-        public DefaultModelStateValidator(IObjectModelValidator validator, MvcOptions options)
-            : this(validator, options, null)
+        public DefaultModelStateValidator(IObjectModelValidator validator, ModelStateValidateOptions options)
+            : this(validator, ApplyOptions(options), null)
         {
         }
 

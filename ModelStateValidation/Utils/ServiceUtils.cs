@@ -31,13 +31,12 @@ namespace ModelStateValidation
         {
             return new ServiceCollection()
                                     .TryAddDefaultServices()
-                                    .BuildServiceProvider();
+                                    .BuildServiceProvider(true);
         }
 
         internal static IServiceCollection TryAddDefaultServices(this IServiceCollection services)
         {
-            services.AddOptions();
-
+            services.AddOptions<MvcOptions>();
             services.TryAddSingleton<IValidationAttributeAdapterProvider, ValidationAttributeAdapterProvider>();
             services.TryAddTransient<IConfigureOptions<MvcOptions>, ModelStateValidationPostConfigurer>();
             services.TryAddSingleton<IModelMetadataProvider, DefaultModelMetadataProvider>();
