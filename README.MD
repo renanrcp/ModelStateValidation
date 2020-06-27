@@ -6,10 +6,13 @@
 		<img src="https://img.shields.io/github/workflow/status/renanrcp/ModelStateValidation/.NET%20Core?label=BUILD%20STATUS&logo=github&style=for-the-badge&logoWidth=20&color=181717" />
 	</a>
 	<a href="https://www.nuget.org/packages/ModelStateValidation/">
+		<img src="https://img.shields.io/nuget/v/ModelStateValidation.svg?label=Version&logo=nuget&style=for-the-badge&logoWidth=20&labelColor=0d0d0d" />
+	</a>
+	<a href="https://www.nuget.org/packages/ModelStateValidation/">
 		<img src="https://img.shields.io/nuget/dt/ModelStateValidation.svg?label=Downloads&logo=nuget&style=for-the-badge&logoWidth=20&labelColor=0d0d0d" />
 	</a>
     <a href="https://github.com/renanrcp/ModelStateValidation/blob/master/LICENSE">
-		<img src="https://img.shields.io/badge/License-MIT-yellow.svg?label=License&style=for-the-badge&logoWidth=20" />
+		<img src="https://img.shields.io/badge/License-MIT-yellow.svg?label=License&style=for-the-badge&logoWidth=20&labelColor=0d0d0d" />
 	</a>
     <p align="center">
         The ASP.NET Core Model State Validator fully abstracted to use in any .NET Core application.
