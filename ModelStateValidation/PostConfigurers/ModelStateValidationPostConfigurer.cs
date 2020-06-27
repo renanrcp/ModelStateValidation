@@ -15,7 +15,7 @@ namespace ModelStateValidation
         public ModelStateValidationPostConfigurer(
             IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
             IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions,
-            IStringLocalizerFactory stringLocalizerFactory)
+            IStringLocalizerFactory stringLocalizerFactory = null)
         {
             if (validationAttributeAdapterProvider == null)
             {
