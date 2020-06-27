@@ -14,9 +14,10 @@
     <p align="center">
         The ASP.NET Core Model State Validator fully abstracted to use in any .NET Core application.
     </p>
+	<p align="center">
+		This lib allows you to use the ASP.NET Core Model 	State Validator in any .NET Core project.
+	</p>
 </p>
-
-This lib allows you to use the ASP.NET Core Model State Validator in any .NET Core project.
 
 # Warning
 
