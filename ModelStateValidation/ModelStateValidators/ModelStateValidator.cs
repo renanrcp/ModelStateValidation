@@ -46,7 +46,7 @@ namespace ModelStateValidation
         {
             var provider = ServiceUtils.GetDefaultServiceProvider();
 
-            var modelStateValidator = provider.GetRequiredService<IModelStateValidator>();
+            var modelStateValidator = provider.GetService<IModelStateValidator>();
 
             return modelStateValidator.TryValidateModel(model, modelState, prefix);
         }

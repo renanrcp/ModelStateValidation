@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
@@ -7,16 +8,26 @@ namespace ModelStateValidation
     internal sealed class DefaultModelStateValidator : IModelStateValidator
     {
         private readonly IObjectModelValidator _validator;
+        private readonly MvcOptions _options;
         private readonly IServiceProvider _provider;
 
-        public DefaultModelStateValidator(IObjectModelValidator validator)
-            : this(validator, null)
+        public DefaultModelStateValidator(IObjectModelValidator validator, ModelStateValidateOptions options)
+            : this(validator, ApplyOptions(options))
         {
         }
 
-        public DefaultModelStateValidator(IObjectModelValidator validator, IServiceProvider provider)
+        public DefaultModelStateValidator(IObjectModelValidator validator, MvcOptions options)
+            : this(validator, options, null)
+        {
+        }
+
+        public DefaultModelStateValidator(IObjectModelValidator validator, MvcOptions options, IServiceProvider provider)
         {
             if (validator == null)
+            {
+                throw new ArgumentNullException(nameof(validator));
+            }
+            if (options == null)
             {
                 throw new ArgumentNullException(nameof(validator));
             }
@@ -42,6 +53,20 @@ namespace ModelStateValidation
             _validator.Validate(actionContext, null, prefix, model);
 
             return modelState.IsValid;
+        }
+
+        private static MvcOptions ApplyOptions(ModelStateValidateOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var mvcOptions = new MvcOptions();
+
+            options.ConfigureMvc(mvcOptions);
+
+            return mvcOptions;
         }
     }
 }
