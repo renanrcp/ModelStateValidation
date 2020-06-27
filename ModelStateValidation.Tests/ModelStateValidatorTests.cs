@@ -4,7 +4,7 @@ using Xunit;
 
 namespace ModelStateValidation.Tests
 {
-    public class ModelStateValidatorTests : BaseModelStateValidatorSetup
+    public class ModelStateValidatorTests : ModelStateValidatorSetup
     {
         private const string SOME_CRAZY_STRING = "SomeCrazyStringLol";
 

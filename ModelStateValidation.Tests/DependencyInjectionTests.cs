@@ -11,7 +11,7 @@ using Xunit;
 
 namespace ModelStateValidation.Tests
 {
-    public class DependencyInjectionTests : BaseDISetup
+    public class DependencyInjectionTests : DISetup
     {
         [Fact]
         public void CanGetModelStateValidator()

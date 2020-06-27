@@ -4,11 +4,11 @@ using Xunit;
 
 namespace ModelStateValidation.Tests
 {
-    public abstract class BaseModelStateValidatorSetup : BaseDISetup
+    public abstract class ModelStateValidatorSetup : DISetup
     {
         protected readonly IModelStateValidator _validator;
 
-        protected BaseModelStateValidatorSetup()
+        protected ModelStateValidatorSetup()
         {
             _validator = _provider.GetRequiredService<IModelStateValidator>();
         }

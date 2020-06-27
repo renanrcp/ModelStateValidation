@@ -2,11 +2,11 @@ using System;
 
 namespace ModelStateValidation.Tests
 {
-    public abstract class BaseDISetup
+    public abstract class DISetup
     {
         protected readonly IServiceProvider _provider;
 
-        protected BaseDISetup()
+        protected DISetup()
         {
             _provider = ServiceUtils.GetDefaultServiceProvider();
         }
