@@ -21,7 +21,7 @@ namespace ModelStateValidation.Tests
             Assert.Empty(results);
 
             Assert.Equal(nameof(ValidatableSampleModel), model.DisplayName);
-            Assert.Equal(null, model.MemberName);
+            Assert.Null(model.MemberName);
             Assert.Equal(model, model.ObjectInstance);
         }
 
