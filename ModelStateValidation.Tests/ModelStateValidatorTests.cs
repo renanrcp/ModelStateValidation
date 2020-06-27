@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Xunit;
 
@@ -230,6 +231,160 @@ namespace ModelStateValidation.Tests
             {
                 Url = "https://somedomain.com",
             };
+
+            Pass(model);
+        }
+
+        [Fact]
+        public void NotPassComplexModel()
+        {
+            var model = new ComplexModel
+            {
+                // will pass
+                FirstSummary = SOME_CRAZY_STRING,
+                // won't pass
+                Model = new RequiredModel
+                {
+                    Summary = string.Empty,
+                },
+            };
+
+            NotPass(model);
+        }
+
+        [Fact]
+        public void PassComplexModel()
+        {
+            var model = new ComplexModel
+            {
+                // will pass
+                FirstSummary = SOME_CRAZY_STRING,
+                // will pass
+                Model = new RequiredModel
+                {
+                    Summary = SOME_CRAZY_STRING,
+                },
+            };
+
+            Pass(model);
+        }
+
+        [Fact]
+        public void NotPassEnumerable()
+        {
+            var models = new List<ComplexModel>();
+
+            models.Add(new ComplexModel
+            {
+                // will pass
+                FirstSummary = SOME_CRAZY_STRING,
+                // will pass
+                Model = new RequiredModel
+                {
+                    Summary = SOME_CRAZY_STRING,
+                },
+            });
+            models.Add(new ComplexModel
+            {
+                // will pass
+                FirstSummary = SOME_CRAZY_STRING,
+                // won't pass
+                Model = new RequiredModel
+                {
+                    Summary = string.Empty,
+                },
+            });
+
+            NotPass(models);
+        }
+
+        [Fact]
+        public void PassEnumerable()
+        {
+            var models = new List<ComplexModel>();
+
+            models.Add(new ComplexModel
+            {
+                // will pass
+                FirstSummary = SOME_CRAZY_STRING,
+                // will pass
+                Model = new RequiredModel
+                {
+                    Summary = SOME_CRAZY_STRING,
+                },
+            });
+            models.Add(new ComplexModel
+            {
+                // will pass
+                FirstSummary = SOME_CRAZY_STRING,
+                // will pass
+                Model = new RequiredModel
+                {
+                    Summary = SOME_CRAZY_STRING,
+                },
+            });
+
+            Pass(models);
+        }
+
+        [Fact]
+        public void NotPassModelWithEnumerable()
+        {
+            var model = new EnumerableModel
+            {
+                Models = new List<ComplexModel>(),
+            };
+            model.Models.Add(new ComplexModel
+            {
+                // will pass
+                FirstSummary = SOME_CRAZY_STRING,
+                // will pass
+                Model = new RequiredModel
+                {
+                    Summary = SOME_CRAZY_STRING,
+                },
+            });
+            model.Models.Add(new ComplexModel
+            {
+                // will pass
+                FirstSummary = SOME_CRAZY_STRING,
+                // won't pass
+                Model = new RequiredModel
+                {
+                    Summary = string.Empty,
+                },
+            });
+
+            NotPass(model);
+        }
+
+        [Fact]
+        public void PassModelWithEnumerable()
+        {
+            var model = new EnumerableModel
+            {
+                Models = new List<ComplexModel>(),
+            };
+            model.Models.Add(new ComplexModel
+            {
+                // will pass
+                FirstSummary = SOME_CRAZY_STRING,
+                // will pass
+                Model = new RequiredModel
+                {
+                    Summary = SOME_CRAZY_STRING,
+                },
+            });
+            model.Models.Add(new ComplexModel
+            {
+                // will pass
+                FirstSummary = SOME_CRAZY_STRING,
+                // will pass
+                Model = new RequiredModel
+                {
+                    Summary = SOME_CRAZY_STRING,
+                },
+            });
 
             Pass(model);
         }
