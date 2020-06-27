@@ -62,9 +62,11 @@ namespace ModelStateValidation
 
             var actionContext = ValidatorUtils.CreateActionContext(modelState, _provider);
 
+            actionContext.ModelState.MaxAllowedErrors = _options.MaxModelValidationErrors;
+
             _validator.Validate(actionContext, null, prefix, model);
 
-            return modelState.IsValid;
+            return actionContext.ModelState.IsValid;
         }
 
         private static MvcOptions ApplyOptions(ModelStateValidateOptions options)

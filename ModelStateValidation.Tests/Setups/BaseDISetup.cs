@@ -6,7 +6,7 @@ namespace ModelStateValidation.Tests
     {
         protected readonly IServiceProvider _provider;
 
-        public BaseDISetup()
+        protected BaseDISetup()
         {
             _provider = ServiceUtils.GetDefaultServiceProvider();
         }
