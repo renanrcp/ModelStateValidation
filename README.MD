@@ -1,7 +1,5 @@
 # ModelStateValidation
 
-> The ASP.NET Core Model State Validator fully abstracted to use in any .NET Core application.
-
 <p align="center">
 	</br>
 	<a href="https://github.com/renanrcp/ModelStateValidation/actions">
@@ -13,6 +11,9 @@
     <a href="https://github.com/renanrcp/ModelStateValidation/blob/master/LICENSE">
 		<img src="https://img.shields.io/badge/License-MIT-yellow.svg?label=License&style=for-the-badge&logoWidth=20" />
 	</a>
+    <p align="center">
+        The ASP.NET Core Model State Validator fully abstracted to use in any .NET Core application.
+    </p>
 </p>
 
 This lib allows you to use the ASP.NET Core Model State Validator in any .NET Core project.
