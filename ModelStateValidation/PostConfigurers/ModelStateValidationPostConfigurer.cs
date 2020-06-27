@@ -14,7 +14,8 @@ namespace ModelStateValidation
 
         public ModelStateValidationPostConfigurer(
             IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
-            IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions)
+            IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions,
+            IStringLocalizerFactory stringLocalizerFactory)
         {
             if (validationAttributeAdapterProvider == null)
             {
@@ -28,6 +29,7 @@ namespace ModelStateValidation
 
             _validationAttributeAdapterProvider = validationAttributeAdapterProvider;
             _dataAnnotationLocalizationOptions = dataAnnotationLocalizationOptions;
+            _stringLocalizerFactory = stringLocalizerFactory;
         }
         public void Configure(MvcOptions options)
         {
