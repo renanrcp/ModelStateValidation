@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace ModelStateValidation
 {
-    internal sealed class DefaultMetadataDetailsProvider : ICompositeMetadataDetailsProvider
+    internal sealed class DefaultCompositeMetadataDetailsProvider : ICompositeMetadataDetailsProvider
     {
         private readonly IEnumerable<IMetadataDetailsProvider> _providers;
 
         /// <summary>
-        /// Creates a new <see cref="DefaultCompositeMetadataDetailsProvider"/>.
+        /// Creates a new <see cref="Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultCompositeMetadataDetailsProvider"/>.
         /// </summary>
         /// <param name="providers">The set of <see cref="IMetadataDetailsProvider"/> instances.</param>
-        public DefaultMetadataDetailsProvider(IEnumerable<IMetadataDetailsProvider> providers)
+        public DefaultCompositeMetadataDetailsProvider(IEnumerable<IMetadataDetailsProvider> providers)
         {
             _providers = providers;
         }

@@ -36,7 +36,7 @@ namespace ModelStateValidation
                 throw new ArgumentNullException(nameof(options));
             }
 
-            options.ModelMetadataDetailsProviders.Add(new DefaultMetadataProvider(
+            options.ModelMetadataDetailsProviders.Add(new DataAnnotationsMetadataProvider(
                 options,
                 _dataAnnotationLocalizationOptions,
                 _stringLocalizerFactory));

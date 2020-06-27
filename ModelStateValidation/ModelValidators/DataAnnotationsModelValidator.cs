@@ -8,20 +8,20 @@ using Microsoft.Extensions.Localization;
 
 namespace ModelStateValidation
 {
-    internal sealed class DefaultModelValidator : IModelValidator
+    internal sealed class DataAnnotationsModelValidator : IModelValidator
     {
         private static readonly object _emptyValidationContextInstance = new object();
         private readonly IStringLocalizer _stringLocalizer;
         private readonly IValidationAttributeAdapterProvider _validationAttributeAdapterProvider;
 
         /// <summary>
-        ///  Create a new instance of <see cref="DataAnnotationsModelValidator"/>.
+        ///  Create a new instance of <see cref="Microsoft.AspNetCore.Mvc.DataAnnotations.DataAnnotationsModelValidator"/>.
         /// </summary>
         /// <param name="attribute">The <see cref="ValidationAttribute"/> that defines what we're validating.</param>
         /// <param name="stringLocalizer">The <see cref="IStringLocalizer"/> used to create messages.</param>
         /// <param name="validationAttributeAdapterProvider">The <see cref="IValidationAttributeAdapterProvider"/>
         /// which <see cref="ValidationAttributeAdapter{TAttribute}"/>'s will be created from.</param>
-        public DefaultModelValidator(
+        public DataAnnotationsModelValidator(
             IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
             ValidationAttribute attribute,
             IStringLocalizer stringLocalizer)

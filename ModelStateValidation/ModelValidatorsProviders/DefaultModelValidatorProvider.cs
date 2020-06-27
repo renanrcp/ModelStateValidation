@@ -68,7 +68,7 @@ namespace ModelStateValidation
                     continue;
                 }
 
-                var validator = new DefaultModelValidator(
+                var validator = new DataAnnotationsModelValidator(
                     _validationAttributeAdapterProvider,
                     attribute,
                     stringLocalizer);

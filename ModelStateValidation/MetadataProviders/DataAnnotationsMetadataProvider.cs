@@ -13,7 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace ModelStateValidation
 {
-    internal sealed class DefaultMetadataProvider :
+    internal sealed class DataAnnotationsMetadataProvider :
         IBindingMetadataProvider,
         IDisplayMetadataProvider,
         IValidationMetadataProvider
@@ -29,7 +29,7 @@ namespace ModelStateValidation
         private readonly MvcOptions _options;
         private readonly MvcDataAnnotationsLocalizationOptions _localizationOptions;
 
-        public DefaultMetadataProvider(
+        public DataAnnotationsMetadataProvider(
             MvcOptions options,
             IOptions<MvcDataAnnotationsLocalizationOptions> localizationOptions,
             IStringLocalizerFactory stringLocalizerFactory)

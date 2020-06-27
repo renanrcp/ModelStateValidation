@@ -45,7 +45,7 @@ namespace ModelStateValidation
             services.TryAddSingleton<ICompositeMetadataDetailsProvider>(a =>
             {
                 var options = a.GetRequiredService<IOptions<MvcOptions>>().Value;
-                return new DefaultMetadataDetailsProvider(options.ModelMetadataDetailsProviders);
+                return new DefaultCompositeMetadataDetailsProvider(options.ModelMetadataDetailsProviders);
             });
             services.TryAddSingleton<IObjectModelValidator>(a =>
             {
