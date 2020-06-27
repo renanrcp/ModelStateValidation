@@ -15,7 +15,7 @@ namespace ModelStateValidation
         private readonly IValidationAttributeAdapterProvider _validationAttributeAdapterProvider;
 
         /// <summary>
-        ///  Create a new instance of <see cref="Microsoft.AspNetCore.Mvc.DataAnnotations.DataAnnotationsModelValidator"/>.
+        ///  Create a new instance of <see cref="DataAnnotationsModelValidator"/>.
         /// </summary>
         /// <param name="attribute">The <see cref="ValidationAttribute"/> that defines what we're validating.</param>
         /// <param name="stringLocalizer">The <see cref="IStringLocalizer"/> used to create messages.</param>

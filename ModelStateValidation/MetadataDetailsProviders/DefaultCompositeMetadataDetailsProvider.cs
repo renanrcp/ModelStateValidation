@@ -10,9 +10,9 @@ namespace ModelStateValidation
         private readonly IEnumerable<IMetadataDetailsProvider> _providers;
 
         /// <summary>
-        /// Creates a new <see cref="Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultCompositeMetadataDetailsProvider"/>.
+        /// Creates a new <see cref="DefaultCompositeMetadataDetailsProvider" />.
         /// </summary>
-        /// <param name="providers">The set of <see cref="IMetadataDetailsProvider"/> instances.</param>
+        /// <param name="providers">The set of <see cref="IMetadataDetailsProvider" /> instances.</param>
         public DefaultCompositeMetadataDetailsProvider(IEnumerable<IMetadataDetailsProvider> providers)
         {
             _providers = providers;
