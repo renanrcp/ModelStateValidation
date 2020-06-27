@@ -3,7 +3,7 @@
 <p align="center">
 	</br>
 	<a href="https://github.com/renanrcp/ModelStateValidation/actions">
-		<img src="https://img.shields.io/github/workflow/status/renanrcp/ModelStateValidation/.NET%20Core?label=BUILD%20STATUS&logo=github&style=for-the-badge&logoWidth=20&color=181717" />
+		<img src="https://img.shields.io/github/workflow/status/renanrcp/ModelStateValidation/.NET%20Core?label=BUILD%20STATUS&logo=github&style=for-the-badge&logoWidth=20&labelColor=0d0d0d" />
 	</a>
 	<a href="https://www.nuget.org/packages/ModelStateValidation/">
 		<img src="https://img.shields.io/nuget/v/ModelStateValidation.svg?label=Version&logo=nuget&style=for-the-badge&logoWidth=20&labelColor=0d0d0d" />
