@@ -17,10 +17,21 @@ namespace ModelStateValidation
         {
         }
 
+        public DefaultModelStateValidator(IObjectModelValidator validator, IOptions<MvcOptions> options, IServiceProvider provider)
+            : this(validator, options.Value, provider)
+        {
+        }
+
         public DefaultModelStateValidator(IObjectModelValidator validator, ModelStateValidateOptions options)
             : this(validator, ApplyOptions(options), null)
         {
         }
+
+        public DefaultModelStateValidator(IObjectModelValidator validator, ModelStateValidateOptions options, IServiceProvider provider)
+            : this(validator, ApplyOptions(options), provider)
+        {
+        }
+
 
         public DefaultModelStateValidator(IObjectModelValidator validator, MvcOptions options, IServiceProvider provider)
         {
