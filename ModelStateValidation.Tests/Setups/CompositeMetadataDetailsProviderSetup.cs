@@ -15,7 +15,7 @@ namespace ModelStateValidation.Tests
             _compositeMetadataDetailsProvider = _provider.GetRequiredService<ICompositeMetadataDetailsProvider>();
         }
 
-        protected (ModelMetadataIdentity key, ModelAttributes attributes) GetMockedDependencies()
+        protected (ModelMetadataIdentity, ModelAttributes) GetMockedDependencies()
         {
             var modelType = typeof(CompositeModel);
 
