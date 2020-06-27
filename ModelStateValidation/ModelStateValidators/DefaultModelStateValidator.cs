@@ -45,6 +45,7 @@ namespace ModelStateValidation
             }
 
             _validator = validator;
+            _options = options;
             _provider = provider ?? ServiceUtils.GetDefaultServiceProvider();
         }
 

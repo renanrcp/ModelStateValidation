@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Xunit;
 
 namespace ModelStateValidation.Tests
@@ -8,8 +9,12 @@ namespace ModelStateValidation.Tests
         public void NotPassWithNullString()
         {
             var model = new RequiredModel();
+            var modelState = new ModelStateDictionary();
 
-            var result = _validator.TryValidateModel(model);
+            var result = _validator.TryValidateModel(model, modelState);
+
+            Assert.False(result);
+            Assert.NotEmpty(modelState);
         }
     }
 }
