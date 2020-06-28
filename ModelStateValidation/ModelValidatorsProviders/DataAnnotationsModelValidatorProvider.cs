@@ -15,7 +15,7 @@ namespace ModelStateValidation
         private readonly IValidationAttributeAdapterProvider _validationAttributeAdapterProvider;
 
         /// <summary>
-        /// Create a new instance of <see cref="Microsoft.AspNetCore.Mvc.DataAnnotations.DataAnnotationsModelValidatorProvider"/>.
+        /// Create a new instance of <see cref="DataAnnotationsModelValidatorProvider"/>.
         /// </summary>
         /// <param name="validationAttributeAdapterProvider">The <see cref="IValidationAttributeAdapterProvider"/>
         /// that supplies <see cref="IAttributeAdapter"/>s.</param>
