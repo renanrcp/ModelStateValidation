@@ -10,16 +10,16 @@ using Microsoft.Extensions.Options;
 
 namespace ModelStateValidation.Tests
 {
-    public class ModelValidatorProviderSetup : CompositeMetadataDetailsProviderSetup
+    public class DataAnnotationsModelValidatorProviderSetup : CompositeMetadataDetailsProviderSetup
     {
-        internal readonly DefaultModelValidatorProvider _modelValidatorProvider;
+        internal readonly DataAnnotationsModelValidatorProvider _modelValidatorProvider;
 
-        protected ModelValidatorProviderSetup()
+        protected DataAnnotationsModelValidatorProviderSetup()
         {
             var validationAttributeAdapter = _provider.GetRequiredService<IValidationAttributeAdapterProvider>();
             var options = _provider.GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
 
-            _modelValidatorProvider = new DefaultModelValidatorProvider(validationAttributeAdapter, options, null);
+            _modelValidatorProvider = new DataAnnotationsModelValidatorProvider(validationAttributeAdapter, options, null);
         }
 
         protected ModelValidatorProviderContext GetMockedContext()

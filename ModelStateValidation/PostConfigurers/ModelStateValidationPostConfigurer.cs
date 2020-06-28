@@ -43,7 +43,7 @@ namespace ModelStateValidation
                 _dataAnnotationLocalizationOptions,
                 _stringLocalizerFactory));
 
-            options.ModelValidatorProviders.Add(new DefaultModelValidatorProvider(
+            options.ModelValidatorProviders.Add(new DataAnnotationsModelValidatorProvider(
                 _validationAttributeAdapterProvider,
                 _dataAnnotationLocalizationOptions,
                 _stringLocalizerFactory));

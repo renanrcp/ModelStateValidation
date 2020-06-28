@@ -5,7 +5,7 @@ using Xunit;
 
 namespace ModelStateValidation.Tests
 {
-    public class ModelValidatorProviderTests : ModelValidatorProviderSetup
+    public class DataAnnotationsModelValidatorProviderTests : DataAnnotationsModelValidatorProviderSetup
     {
         [Fact]
         public void CanCreateValidators()

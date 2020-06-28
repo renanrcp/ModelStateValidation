@@ -8,14 +8,14 @@ using Microsoft.Extensions.Options;
 
 namespace ModelStateValidation
 {
-    internal sealed class DefaultModelValidatorProvider : IMetadataBasedModelValidatorProvider
+    internal sealed class DataAnnotationsModelValidatorProvider : IMetadataBasedModelValidatorProvider
     {
         private readonly IOptions<MvcDataAnnotationsLocalizationOptions> _options;
         private readonly IStringLocalizerFactory _stringLocalizerFactory;
         private readonly IValidationAttributeAdapterProvider _validationAttributeAdapterProvider;
 
         /// <summary>
-        /// Create a new instance of <see cref="DataAnnotationsModelValidatorProvider"/>.
+        /// Create a new instance of <see cref="Microsoft.AspNetCore.Mvc.DataAnnotations.DataAnnotationsModelValidatorProvider"/>.
         /// </summary>
         /// <param name="validationAttributeAdapterProvider">The <see cref="IValidationAttributeAdapterProvider"/>
         /// that supplies <see cref="IAttributeAdapter"/>s.</param>
@@ -23,7 +23,7 @@ namespace ModelStateValidation
         /// <param name="stringLocalizerFactory">The <see cref="IStringLocalizerFactory"/>.</param>
         /// <remarks><paramref name="options"/> and <paramref name="stringLocalizerFactory"/>
         /// are nullable only for testing ease.</remarks>
-        public DefaultModelValidatorProvider(
+        public DataAnnotationsModelValidatorProvider(
             IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
             IOptions<MvcDataAnnotationsLocalizationOptions> options,
             IStringLocalizerFactory stringLocalizerFactory)
